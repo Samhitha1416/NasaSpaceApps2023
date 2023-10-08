@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>About</title>
+
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+   
+<!-- header section starts  -->
+
+<header class="header" data-aos="fade-down">
+
+   <section class="flex">
+
+      <a href="home.html" class="logo">GalaxyHub.</a>
+
+      
+
+      <div id="menu-btn" class="fas fa-bars"></div>
+
+   </section>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- about section starts  -->
+
+<div class="container about">
+   <h1 class="heading" data-aos="zoom-out">Travel Guide</h1>
+      <section class="test">
+         <div class="details">
+            <h1 style="color: white;" style="font-size: larger;">
+            <center>
+                Discover the universe's most captivating destinations with our interactive travel guide. We're thrilled to embark on this journey with you, unlocking the secrets and wonders of our universe. Our mission is to be your trusted companion on your travels, providing you with essential facts, insider tips, and a glimpse into the heart of each location. Whether you're a seasoned explorer or setting out on your very first adventure, this guide is designed to inspire and inform. So, fasten your seatbelt, and get ready to embark on a journey of discovery. The universe is vast, and the possibilities are endless. Let's begin this incredible adventure together! Safe travels and unforgettable experiences await you.
+                Bon voyage!
+            </center>
+            </h1>
+         </div>
+
+         <div class="details1"></div>
+        </section>
+</div>
+
+<!-- reviews section ends -->
+
+
+
+<script>
+   function calculateTotalCost(path, graph) {
+       let cost = 0;
+       for (let i = 0; i < path.length - 1; i++) {
+           const from = path[i];
+           const to = path[i + 1];
+           cost += graph[from][to];
+       }
+       return cost;
+   }
+
+   function permute(arr) {
+       if (arr.length === 0)
+           return [[]];
+       const permutations = [];
+       for (let i = 0; i < arr.length; i++) {
+           const remaining = [...arr.slice(0, i), ...arr.slice(i + 1)];
+           const partialPermutations = permute(remaining);
+           for (const perm of partialPermutations) {
+               permutations.push([arr[i], ...perm]);
+           }
+       }
+       return permutations;
+   }
+
+   function tsp(graph) {
+       const n = graph.length;
+       if (n === 0)
+           return { minCost: 0, path: [] };
+       const cities = Array.from({ length: n }, (_, i) => i);
+       const permutations = permute(cities.slice(1));
+       let minCost = Infinity;
+       let bestPath = [];
+       for (const permutation of permutations) {
+           const path = [0, ...permutation, 0];
+           const totalCost = calculateTotalCost(path, graph);
+           if (totalCost < minCost) {
+               minCost = totalCost;
+               bestPath = path;
+           }
+       }
+       return { minCost, bestPath };
+   }
+
+   function placename(num){
+       if(num === 0)
+           return "Caloris Basin";
+       if(num === 1)
+           return "Caloris Planitia";
+       if(num === 2)
+           return "Scarps";
+       if(num === 3)
+           return "Mead";
+       if(num === 4)
+           return "Fortuna";
+       if(num === 5)
+           return "Maat Mons";
+       if(num === 6)
+           return "Breathtaking Lunar Landscapes";
+       if(num === 7)
+           return "Historic Apollo Landing Sites";
+       if(num === 8)
+           return "Earthrise And Earthset";
+       if(num === 9)
+           return "Olympus Mons";
+       if(num === 10)
+           return "Kasei Valles";
+       if(num === 11)
+           return "Great Red Spot";
+       if(num === 12)
+           return "Ganymede";
+       if(num === 13)
+           return "Callisto";
+       if(num === 14)
+           return "Ring System";
+       if(num === 15)
+           return "Titan";
+       if(num === 16)
+           return "Great White Spot";
+       if(num === 17)
+           return "Ariel, Umbriel, Titania & Oberon";
+       if(num === 18)
+           return "Rings Of Uranus";
+       if(num === 19)
+           return "Great Dark Spot";
+       if(num === 20)
+           return "Rings Of Neptune";
+       if(num === 21)
+           return "Triton";
+       if(num === 22)
+           return "Sputnik Planitia";
+   }
+
+   function planetname(num){
+       if (num >= 0 && num <= 2) {
+           return "Mercury";
+       } else if (num >= 3 && num <= 5) {
+           return "Venus";
+       } else if (num >= 6 && num <= 8) {
+           return "Moon";
+       } else if (num >= 9 && num <= 10) {
+           return "Mars"
+       } else if (num >= 11 && num <= 13) {
+           return "Jupiter";
+       } else if (num >= 14 && num <= 16) {
+           return "Saturn";
+       } else if (num >= 17 && num <= 18) {
+           return "Uranus";
+       } else if (num >= 19 && num <= 21) {
+           return "Neptune";
+       } else if (num === 22) {
+           return "Pluto";
+       }
+   }
+
+   var queryString = window.location.search;
+   var urlParams = new URLSearchParams(queryString);
+   var selectedOptions = urlParams.get('options');
+
+   if (selectedOptions) {
+       var optionsArray = selectedOptions.split(',');
+       var numberArray = [];
+       for (var i = 0; i < optionsArray.length; i++)
+           numberArray.push(parseInt(optionsArray[i]));
+
+       var graph = []
+       for(var i = 0; i < numberArray.length; i++) {
+           graph.push(new Array(numberArray.length).fill(0))
+       }
+
+       var matrix = [[0,1,2,3,3,4,6,7,6,10,10,11,11,12,14,14,15,17,18,19,20,19,22],
+       [1,0,2,4,3,4,7,7,7,9,10,12,12,11,14,15,16,17,18,19,20,19,22],
+       [2,2,0,5,4,5,8,6,6,9,9,13,11,13,14,15,14,17,17,19,20,19,22],
+       [3,4,5,0,3,4,6,8,7,9,10,12,12,12,14,15,15,17,18,19,20,21,22],
+       [3,3,4,3,0,5,8,8,6,10,9,11,12,12,15,14,16,17,18,19,20,20,22],
+       [4,4,5,4,5,0,7,6,8,10,9,12,13,13,16,16,15,17,18,19,21,20,22],
+       [6,7,8,6,8,7,0,8,6,10,10,13,11,12,16,16,14,17,17,20,21,20,22],
+       [7,7,6,8,8,6,8,0,7,9,9,13,11,11,16,16,16,17,17,20,21,21,22],
+       [6,7,6,7,6,8,6,7,0,9,10,13,12,11,15,15,15,18,17,20,20,21,22],
+       [10,9,9,9,10,10,10,9,9,0,10,11,12,11,15,15,14,18,18,20,20,20,22],
+       [10,10,9,10,9,9,10,9,10,10,0,11,11,11,15,14,16,18,17,20,21,21,22],
+       [11,12,13,12,11,12,13,13,13,11,11,0,13,12,14,14,16,18,18,21,20,20,22],
+       [11,12,11,12,12,13,11,11,12,12,11,13,0,11,15,14,15,18,17,21,21,21,22],
+       [12,11,13,12,12,13,12,11,11,11,11,12,11,0,16,16,14,18,17,21,19,19,22],
+       [14,14,14,14,15,16,16,16,15,15,15,14,15,16,0,14,16,18,18,21,19,19,22],
+       [14,15,15,14,14,16,16,16,15,15,14,14,14,16,14,0,15,18,17,21,21,19,22],
+       [15,16,14,15,16,15,14,16,15,14,16,16,15,14,16,15,0,18,17,20,20,20,22],
+       [17,17,17,17,17,17,17,17,18,18,18,18,18,18,18,18,18,0,17,21,21,21,22],
+       [18,18,17,18,18,18,17,17,17,18,17,18,17,17,18,17,17,17,0,19,19,20,22],
+       [19,19,19,19,19,19,20,20,20,20,20,21,21,21,21,21,21,20,19,0,20,20,22],
+       [20,20,20,20,20,21,21,21,20,20,21,20,21,19,19,21,20,21,19,20,0,21,22],
+       [19,19,19,21,20,20,20,21,21,20,21,20,21,19,19,19,20,21,20,20,21,0,22],
+       [22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,0]
+       ];
+
+       for (var i = 0; i < numberArray.length; i++) {
+           for (var j = 0; j < numberArray.length; j++) {
+               graph[i][j] += matrix[numberArray[i]][numberArray[j]];
+           }
+       }
+
+       const result = tsp(graph);
+       //console.log("Minimum Cost:", result.minCost);
+       //console.log("Best Path:", result.bestPath);
+
+       var path = []
+       result.bestPath.forEach(function (item){
+           path.push(numberArray[parseInt(item)]);
+       });
+
+       let flag = true;
+       let days = 2;
+       let itinerary = [];
+       let plan = [];
+
+       for (let i = 0; i < path.length - 1; i++) {
+            if(path[i] === 0)
+                plan.push("Did you know? The Caloris Basin is one of the most prominent and intriguing features on Mercury,it's characterized by its ring of mountains and concentric geological formations.");
+            if(path[i] === 1){
+                plan.push("Believe it or not this is not only the largest volcanic plain on Mercury but also one of the largest impact basins in the solar system.");
+                plan.push("Planitia is an enormous impact basin with a diameter of approximately 1,550 kilometers (963 miles).");
+            }if(path[i] === 2){
+                plan.push("Allow me to enlighten you! Mercury's system of cliffs or scarps is a unique and prominent feature.");
+                plan.push("These cliffs, some of which are hundreds of kilometers long and hundreds of meters high, formed as the planet's crust cooled and contracted.");
+                plan.push("Enterprise Rupes is one of the most well-known and significant scarps on Mercury.");
+            }if(path[i] === 3){
+                plan.push("In case you didn't know, the Mead Crater is a prominent impact crater on the planet Venus.");
+                plan.push("It is one of the many impact craters that dot the Venusian surface.");
+            }if(path[i] === 4){
+                plan.push("Here's an interesting nugget, this is the largest and one of the most prominent examples of tesserae on Venus is the Fortuna Tessera.");
+                plan.push("Fun fact - Tesserae are regions of Venus characterized by highly deformed and rugged terrain with complex networks of ridges and valleys");
+            }if(path[i] === 5){
+                plan.push("Here's a tidbit, this is the largest volcano on Venus.");
+                plan.push("Maat Mons is a massive shield volcano, and it is one of the most prominent volcanic features on the planet.");
+            }if(path[i] === 6){
+                plan.push("Here's your chance, enjoy stunning views of the Moon's surface, including its vast plains, craters, mountains, and other geological features.");
+                plan.push("The barren beauty of the lunar landscape would be a highlight of this journey.");
+            }if(path[i] === 7){
+                plan.push("Little known fact, visit the historic Apollo landing sites and walk in the footsteps of the astronauts who first set foot on the Moon.");
+                plan.push("You might explore artifacts left behind by earlier missions.");
+            }if(path[i] === 8)
+                plan.push("Just a heads up! wait until you witness this awe-inspiring Earthrises and Earthsets from the lunar surface.");
+            if(path[i] === 9){
+                plan.push("In case you didn't know, this is the tallest mountain on Mars, and indeed in the entire solar system.");
+                plan.push("Olympus Mons is an enormous shield volcano, and its size dwarfs any volcano on Earth");
+            }if(path[i] === 10)
+                plan.push("Did you know? The Kasei Valles are a giant system of canyons in Mare Acidalium and Lunae Palus quadrangles on Mars.");
+            if(path[i] === 11){
+                plan.push("Did you know? The Great Red Spot is a massive, long-lived storm on Jupiter.");
+                plan.push("It is a high-pressure anticyclonic storm, and its reddish color is attributed to complex organic molecules in the atmosphere.");
+            }if(path[i] === 12){
+                plan.push("Believe it or not, Ganymede is the largest moon in the solar system and has its own magnetic field.");
+                plan.push("It is has a subsurface ocean as well.");
+            }if(path[i] === 13)
+                plan.push("Just a heads up! Callisto is heavily cratered and geologically inactive, with a surface that preserves a record of impact cratering over billions of years.");
+            if(path[i] === 14){
+                plan.push("Little known fact, Saturn is famous for its elaborate ring system, which is composed of countless icy and rocky particles.");
+                plan.push("Saturn's rings are one of the most distinctive and beautiful features in the solar system.");
+            }if(path[i] === 15){
+                plan.push("Titan, Saturn's largest moon, is particularly intriguing.");
+                plan.push("It has a thick, hazy atmosphere and lakes of liquid hydrocarbons on its surface.");
+                plan.push("Titan is considered one of the most Earth-like worlds in the solar system.");
+            }if(path[i] === 16){
+                plan.push("Did you know that Saturn experiences periodic Great White Spots which are massive storms that can encircle the planet.");
+                plan.push("These storms are similar to Earth's hurricanes but on a much larger scale.");
+            }if(path[i] === 17){
+                plan.push("Names??? These are moons which have a wide range of terrains and cratered surfaces.");
+                plan.push("They are composed primarily of water ice.");
+            }if(path[i] === 18){
+                plan.push("As a matter of fact Uranus has a system of 13 known rings.");
+                plan.push("These rings are much fainter and less prominent than Saturn's rings.");
+                plan.push("The first observations were made in the 1970s and 1980s.");
+            }if(path[i] === 19)
+                plan.push("Neptune has a dynamic and turbulent atmosphere with large storms and vortices.");
+            if(path[i] === 20)
+                plan.push("Neptune has a faint ring system composed of dark, small particles.");
+            if(path[i] === 21)
+                plan.push("Did you know? Triton is the seventh-largest moon in the solar system and the only large moon in the solar system with a retrograde orbit.");
+            if(path[i] === 22){
+                plan.push("Located within the heart-shaped Tombaugh Regio, Sputnik Planitia is a large, relatively flat, and nitrogen ice-covered basin.");
+                plan.push("It appears to be an impact feature, and it's one of the coldest places in the solar system.");
+            }itinerary.push(plan);
+            plan = [];
+       }
+       
+       
+        const container = document.querySelector('.test');
+
+        var count = 0;
+        itinerary.forEach(innerList => {
+        const firstDiv = document.createElement('div');
+        firstDiv.className = 'details';
+        const newDiv = document.createElement('div');
+        newDiv.className = 'box';
+        newDiv.setAttribute('data-aos', 'zoom-in');
+        newDiv.style.backgroundColor = 'black';
+
+        const h3Element = document.createElement('h3');
+        h3Element.textContent = placename(path[count]);
+
+        const ulElement = document.createElement('ul');
+        ulElement.className = 'address';
+        ulElement.style.color = 'white';
+
+        innerList.forEach(item => {
+            const liElement = document.createElement('li');
+            liElement.style.fontSize = 'medium';
+            liElement.textContent = item;
+
+            ulElement.appendChild(liElement);
+        });
+
+        newDiv.appendChild(h3Element);
+        newDiv.appendChild(ulElement);
+
+        firstDiv.appendChild(newDiv);
+        container.appendChild(firstDiv);
+        count++;
+    });
+}
+</script>
+
+
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

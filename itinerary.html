@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>About</title>
+
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+   
+<!-- header section starts  -->
+
+<header class="header" data-aos="fade-down">
+
+   <section class="flex">
+
+      <a href="home.html" class="logo">GalaxyHub.</a>
+
+      
+
+      <div id="menu-btn" class="fas fa-bars"></div>
+
+   </section>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- about section starts  -->
+
+<div class="container about">
+   <h1 class="heading" data-aos="zoom-out">Travel Itinerary</h1>
+      <section class="test">
+         <div class="details">
+            <h1 style="color: white;" style="font-size: larger;">
+            <center>
+            Welcome to a realm where the cosmos unfolds in all its boundless wonder. Planetary tourism is your ticket to a celestial odyssey, where the ordinary fades into the extraordinary. Step aboard our state-of-the-art spacecraft, marvels of imagination and technology, poised to transport you to distant worlds. Whether you're drifting through Venus's crystal clouds, witnessing the vivid hues of a Martian sunrise, or gazing at Jupiter's majestic rings, each moment paints a unique stroke on the canvas of your cosmic adventure.
+            Our team of unparalleled experts and guides are the custodians of the universe's deepest mysteries. From Captain Celestia, the fearless explorer of interstellar phenomena, to Professor Nebulon, the jovial astrophysicist unraveling cosmic enigmas, you're in the most capable hands. These guides are not merely experts; they're passionate storytellers, crafting captivating narratives of the cosmos at every celestial stop.
+            Safety is paramount in our universe. Our fleet of spacecraft boasts imaginative safety features that defy physics – force fields guarding against space debris and shields warding off cosmic radiation. Our team of imaginary space doctors is always at the ready, offering remedies for hypothetical space ailments, from asteroid allergies to lunar lightheadedness. Your journey through this fantastical cosmos is secure, and the impossible is your new reality.
+            </center>
+            </h1>
+         </div>
+
+         <div class="details1"></div>
+   </section>
+   <section>
+    <div class="details">
+        <div class="box" data-aos="zoom-in" style="background-color: black;">
+           <h3>NOTE :</h3>
+           <p style="font-size: large;">Things to be brought</p>
+           <ul class="address" style="color: white;">
+              <li style="font-size: medium;"><i>Space Suit:</i>
+                 A specially designed space suit is the most important piece of clothing to wear in space.</li><br>
+              <li style="font-size: medium;"><i>Special Footwear:</i>  Space boots or slipper-like shoes designed for microgravity environments are essential to prevent floating and to protect your feet.</li>
+              <br><li style="font-size: medium;"><i>Personal Items:</i>   You can bring personal items for comfort and entertainment, such as family photos, books, music, or small mementos. However, space is limited, so personal items must be carefully chosen.</li>
+              <br><li style="font-size: medium;"><i>First Aid kit:</i> If you have any prescribed medications or specific medical needs, you should bring them along and inform the medical team.</li>
+              <br><li style="font-size: medium;"><i>Snacks and Meals:</i> Astronauts have carefully planned meals and snacks, often in the form of dehydrated or freeze-dried foods. These are chosen for their nutritional value and ease of preparation in space.
+              </li><br>
+              <li style="font-size: medium;"><i>Documentation:</i>  You should carry important documentation, including your Space passport and any necessary travel or medical documents.</li>
+              <br>
+              <li style="font-size: medium;"><i>Mission-Specific Equipment:</i> Depending on the mission and your role, you may need specialized tools or equipment. Astronauts often carry out experiments, repairs, and maintenance tasks in space.</li>
+           </ul>
+        </div>
+     </div>
+   </section>
+</div>
+
+<!-- reviews section ends -->
+
+
+
+<script>
+   function calculateTotalCost(path, graph) {
+       let cost = 0;
+       for (let i = 0; i < path.length - 1; i++) {
+           const from = path[i];
+           const to = path[i + 1];
+           cost += graph[from][to];
+       }
+       return cost;
+   }
+
+   function permute(arr) {
+       if (arr.length === 0)
+           return [[]];
+       const permutations = [];
+       for (let i = 0; i < arr.length; i++) {
+           const remaining = [...arr.slice(0, i), ...arr.slice(i + 1)];
+           const partialPermutations = permute(remaining);
+           for (const perm of partialPermutations) {
+               permutations.push([arr[i], ...perm]);
+           }
+       }
+       return permutations;
+   }
+
+   function tsp(graph) {
+       const n = graph.length;
+       if (n === 0)
+           return { minCost: 0, path: [] };
+       const cities = Array.from({ length: n }, (_, i) => i);
+       const permutations = permute(cities.slice(1));
+       let minCost = Infinity;
+       let bestPath = [];
+       for (const permutation of permutations) {
+           const path = [0, ...permutation, 0];
+           const totalCost = calculateTotalCost(path, graph);
+           if (totalCost < minCost) {
+               minCost = totalCost;
+               bestPath = path;
+           }
+       }
+       return { minCost, bestPath };
+   }
+
+   function placename(num){
+       if(num === 0)
+           return "Caloris Basin";
+       if(num === 1)
+           return "Caloris Planitia";
+       if(num === 2)
+           return "Scarps";
+       if(num === 3)
+           return "Mead";
+       if(num === 4)
+           return "Fortuna";
+       if(num === 5)
+           return "Maat Mons";
+       if(num === 6)
+           return "Breathtaking Lunar Landscapes";
+       if(num === 7)
+           return "Historic Apollo Landing Sites";
+       if(num === 8)
+           return "Earthrise And Earthset";
+       if(num === 9)
+           return "Olympus Mons";
+       if(num === 10)
+           return "Kasei Valles";
+       if(num === 11)
+           return "Great Red Spot";
+       if(num === 12)
+           return "Ganymede";
+       if(num === 13)
+           return "Callisto";
+       if(num === 14)
+           return "Ring System";
+       if(num === 15)
+           return "Titan";
+       if(num === 16)
+           return "Great White Spot";
+       if(num === 17)
+           return "Ariel, Umbriel, Titania & Oberon";
+       if(num === 18)
+           return "Rings Of Uranus";
+       if(num === 19)
+           return "Great Dark Spot";
+       if(num === 20)
+           return "Rings Of Neptune";
+       if(num === 21)
+           return "Triton";
+       if(num === 22)
+           return "Sputnik Planitia";
+   }
+
+   function planetname(num){
+       if (num >= 0 && num <= 2) {
+           return "Mercury";
+       } else if (num >= 3 && num <= 5) {
+           return "Venus";
+       } else if (num >= 6 && num <= 8) {
+           return "Moon";
+       } else if (num >= 9 && num <= 10) {
+           return "Mars"
+       } else if (num >= 11 && num <= 13) {
+           return "Jupiter";
+       } else if (num >= 14 && num <= 16) {
+           return "Saturn";
+       } else if (num >= 17 && num <= 18) {
+           return "Uranus";
+       } else if (num >= 19 && num <= 21) {
+           return "Neptune";
+       } else if (num === 22) {
+           return "Pluto";
+       }
+   }
+
+   var queryString = window.location.search;
+   var urlParams = new URLSearchParams(queryString);
+   var selectedOptions = urlParams.get('options');
+
+   if (selectedOptions) {
+       var optionsArray = selectedOptions.split(',');
+       var numberArray = [];
+       for (var i = 0; i < optionsArray.length; i++)
+           numberArray.push(parseInt(optionsArray[i]));
+
+       var graph = []
+       for(var i = 0; i < numberArray.length; i++) {
+           graph.push(new Array(numberArray.length).fill(0))
+       }
+
+       var matrix = [[0,1,2,3,3,4,6,7,6,10,10,11,11,12,14,14,15,17,18,19,20,19,22],
+       [1,0,2,4,3,4,7,7,7,9,10,12,12,11,14,15,16,17,18,19,20,19,22],
+       [2,2,0,5,4,5,8,6,6,9,9,13,11,13,14,15,14,17,17,19,20,19,22],
+       [3,4,5,0,3,4,6,8,7,9,10,12,12,12,14,15,15,17,18,19,20,21,22],
+       [3,3,4,3,0,5,8,8,6,10,9,11,12,12,15,14,16,17,18,19,20,20,22],
+       [4,4,5,4,5,0,7,6,8,10,9,12,13,13,16,16,15,17,18,19,21,20,22],
+       [6,7,8,6,8,7,0,8,6,10,10,13,11,12,16,16,14,17,17,20,21,20,22],
+       [7,7,6,8,8,6,8,0,7,9,9,13,11,11,16,16,16,17,17,20,21,21,22],
+       [6,7,6,7,6,8,6,7,0,9,10,13,12,11,15,15,15,18,17,20,20,21,22],
+       [10,9,9,9,10,10,10,9,9,0,10,11,12,11,15,15,14,18,18,20,20,20,22],
+       [10,10,9,10,9,9,10,9,10,10,0,11,11,11,15,14,16,18,17,20,21,21,22],
+       [11,12,13,12,11,12,13,13,13,11,11,0,13,12,14,14,16,18,18,21,20,20,22],
+       [11,12,11,12,12,13,11,11,12,12,11,13,0,11,15,14,15,18,17,21,21,21,22],
+       [12,11,13,12,12,13,12,11,11,11,11,12,11,0,16,16,14,18,17,21,19,19,22],
+       [14,14,14,14,15,16,16,16,15,15,15,14,15,16,0,14,16,18,18,21,19,19,22],
+       [14,15,15,14,14,16,16,16,15,15,14,14,14,16,14,0,15,18,17,21,21,19,22],
+       [15,16,14,15,16,15,14,16,15,14,16,16,15,14,16,15,0,18,17,20,20,20,22],
+       [17,17,17,17,17,17,17,17,18,18,18,18,18,18,18,18,18,0,17,21,21,21,22],
+       [18,18,17,18,18,18,17,17,17,18,17,18,17,17,18,17,17,17,0,19,19,20,22],
+       [19,19,19,19,19,19,20,20,20,20,20,21,21,21,21,21,21,20,19,0,20,20,22],
+       [20,20,20,20,20,21,21,21,20,20,21,20,21,19,19,21,20,21,19,20,0,21,22],
+       [19,19,19,21,20,20,20,21,21,20,21,20,21,19,19,19,20,21,20,20,21,0,22],
+       [22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,0]
+       ];
+
+       for (var i = 0; i < numberArray.length; i++) {
+           for (var j = 0; j < numberArray.length; j++) {
+               graph[i][j] += matrix[numberArray[i]][numberArray[j]];
+           }
+       }
+
+       const result = tsp(graph);
+       //console.log("Minimum Cost:", result.minCost);
+       //console.log("Best Path:", result.bestPath);
+
+       var path = []
+       result.bestPath.forEach(function (item){
+           path.push(numberArray[parseInt(item)]);
+       });
+
+       let flag = true;
+       let days = 2;
+       let itinerary = [["Depart from earth's spaceport","Witness breathtaking views on your way"]];
+       let plan = [];
+
+       for (let i = 0; i < path.length - 1; i++) {
+       if (flag === true) {
+           plan.push("Visit "+placename(path[i]));
+       }
+       if (i+1 === path.length-1){
+            plan.push("Explore "+planetname(path[i]));
+            plan.push("Start journey to your next destination");
+            itinerary.push(plan);
+            days++;
+            break;
+       }
+       if (path[i] >= 0 && path[i] <= 2 && path[i + 1] >= 0 && path[i + 1] <= 2 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 3 && path[i] <= 5 && path[i + 1] >= 3 && path[i + 1] <= 5 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 6 && path[i] <= 8 && path[i + 1] >= 6 && path[i + 1] <= 8 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 9 && path[i] <= 10 && path[i + 1] >= 9 && path[i + 1] <= 10 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 11 && path[i] <= 13 && path[i + 1] >= 11 && path[i + 1] <= 13 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 14 && path[i] <= 16 && path[i + 1] >= 14 && path[i + 1] <= 16 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 17 && path[i] <= 18 && path[i + 1] >= 17 && path[i + 1] <= 18 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] >= 19 && path[i] <= 21 && path[i + 1] >= 19 && path[i + 1] <= 21 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else if (path[i] === 22 && path[i + 1] === 22 && flag === true) {
+           plan.push("Visit "+placename(path[i+1]));
+           flag = false;
+       } else {
+           plan.push("Explore "+planetname(path[i]));
+           plan.push("Start journey to your next destination");
+           itinerary.push(plan);
+           plan = []
+           days++;
+           flag = true;
+       }
+       }
+        itinerary.push(["Re-enter earth's atmosphere, experiencing the thrilling descent","Touch down safely on earth"]);
+       
+        const container = document.querySelector('.test');
+
+        var count = 1;
+        itinerary.forEach(innerList => {
+        const firstDiv = document.createElement('div');
+        firstDiv.className = 'details';
+        const newDiv = document.createElement('div');
+        newDiv.className = 'box';
+        newDiv.setAttribute('data-aos', 'zoom-in');
+        newDiv.style.backgroundColor = 'black';
+
+        const h3Element = document.createElement('h3');
+        h3Element.textContent = 'Day '+count+':';
+
+        const ulElement = document.createElement('ul');
+        ulElement.className = 'address';
+        ulElement.style.color = 'white';
+
+        innerList.forEach(item => {
+            const liElement = document.createElement('li');
+            liElement.style.fontSize = 'medium';
+            liElement.textContent = item;
+
+            ulElement.appendChild(liElement);
+        });
+
+        newDiv.appendChild(h3Element);
+        newDiv.appendChild(ulElement);
+
+        firstDiv.appendChild(newDiv);
+        container.appendChild(firstDiv);
+        count++;
+    });
+    }
+</script>
+
+
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
